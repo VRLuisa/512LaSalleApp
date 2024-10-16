@@ -4,17 +4,7 @@ import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.offset
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
@@ -56,15 +46,12 @@ import com.example.a512lasalleapp.ui.utils.newsList
 
 @Composable
 fun HomeScreen(innerPadding: PaddingValues, navController: NavController) {
-
     Column(
         modifier = Modifier
             .fillMaxSize()
             .padding(innerPadding)
             .background(MaterialTheme.colorScheme.background)
-            .verticalScroll(
-                rememberScrollState()
-            )
+            .verticalScroll(rememberScrollState())
     ) {
         // Header
         Box(
@@ -74,16 +61,6 @@ fun HomeScreen(innerPadding: PaddingValues, navController: NavController) {
                 .height(270.dp)
                 .background(MaterialTheme.colorScheme.primary)
         ) {
-
-//            AsyncImage(
-//                model = ImageRequest.Builder(LocalContext.current)
-//                    .data("https://www.lasallebajio.edu.mx/comunidad/images/imagotipos/Elementos%20Gr%C3%A1ficos/Edificios%20en%20vectores-13.png")
-//                    .build(),
-//                contentDescription = "Background Image",
-//                modifier = Modifier
-//                    .fillMaxSize()
-//                    .offset(y = 70.dp)
-//            )
             Image(
                 painter = painterResource(id = R.drawable.background),
                 contentDescription = "Background Image",
@@ -97,13 +74,11 @@ fun HomeScreen(innerPadding: PaddingValues, navController: NavController) {
                     .padding(20.dp),
                 verticalAlignment = Alignment.CenterVertically
             ) {
-
                 Image(
                     painter = painterResource(id = R.drawable.logo),
                     contentDescription = "Logo",
                     modifier = Modifier.size(70.dp)
                 )
-
                 Column(
                     modifier = Modifier.weight(1f)
                 ) {
@@ -113,7 +88,7 @@ fun HomeScreen(innerPadding: PaddingValues, navController: NavController) {
                         fontSize = 18.sp
                     )
                     Text(
-                        text = "Luisa Razo",
+                        text = "Luisa Fernanda Vázquez Razo",
                         color = Color.White,
                         fontSize = 24.sp,
                         fontWeight = FontWeight.Bold,
@@ -126,11 +101,10 @@ fun HomeScreen(innerPadding: PaddingValues, navController: NavController) {
                     modifier = Modifier
                         .size(45.dp)
                         .clickable {
-                            Log.i("HomeScreen", "Cerrando sesion")
+                            Log.i("HomeScreen", "Cerrando sesión")
                         },
                     tint = Color.White
                 )
-
             }
         }
 
@@ -149,10 +123,13 @@ fun HomeScreen(innerPadding: PaddingValues, navController: NavController) {
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.SpaceAround
             ) {
-                // Widget
-                Widget(icon = Icons.Default.DateRange, text = "Sin eventos")
-                Widget(icon = Task, text = "2 tareas")
-                Widget(icon = Cash, text = stringResource(id = R.string.cash_text))
+                Widget(icon = Icons.Default.DateRange, text = "Sin eventos") {}
+                Widget(icon = Task, text = "2 tareas") {}
+                Widget(
+                    icon = Cash,
+                    text = stringResource(id = R.string.cash_text),
+                    onClick = { navController.navigate("payments") }
+                )
             }
         }
 
@@ -163,9 +140,7 @@ fun HomeScreen(innerPadding: PaddingValues, navController: NavController) {
                 .background(MaterialTheme.colorScheme.background)
         ) {
             Column(
-                modifier = Modifier
-                    .padding(20.dp)
-
+                modifier = Modifier.padding(20.dp)
             ) {
                 Text(
                     text = stringResource(id = R.string.news),
@@ -174,9 +149,9 @@ fun HomeScreen(innerPadding: PaddingValues, navController: NavController) {
                 LazyRow(
                     horizontalArrangement = Arrangement.spacedBy(16.dp)
                 ) {
-                    items(newsList){ news ->
-                        CardImage(news = news){
-                            navController.navigate(Screens.NewsDetail.route+"/${news.id}")
+                    items(newsList) { news ->
+                        CardImage(news = news) {
+                            navController.navigate(Screens.NewsDetail.route + "/${news.id}")
                         }
                     }
                 }
@@ -191,7 +166,7 @@ fun HomeScreen(innerPadding: PaddingValues, navController: NavController) {
                         .fillMaxWidth()
                         .height(500.dp)
                 ) {
-                    items(communities){
+                    items(communities) {
                         Box(
                             modifier = Modifier
                                 .clip(RoundedCornerShape(16.dp))
@@ -209,7 +184,6 @@ fun HomeScreen(innerPadding: PaddingValues, navController: NavController) {
                 }
             }
         }
-
     }
 }
 
