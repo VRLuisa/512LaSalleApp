@@ -1,7 +1,5 @@
 package com.example.a512lasalleapp.ui.screens
 
-import androidx.compose.material.icons.Icons
-import com.example.a512lasalleapp.ui.utils.Logout
 import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -25,7 +23,7 @@ import com.example.a512lasalleapp.R
 import com.example.a512lasalleapp.ui.theme._512LaSalleAppTheme
 
 @Composable
-fun ChangePwdScreen(innerPadding: PaddingValues) {
+fun ChangePwdScreenV2(innerPadding: PaddingValues) {
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -60,33 +58,26 @@ fun ChangePwdScreen(innerPadding: PaddingValues) {
                     fontWeight = FontWeight.Bold
                 )
                 Spacer(modifier = Modifier.weight(1f))
-                Icon(
-                    imageVector = Logout,
-                    contentDescription = "Logout",
-                    modifier = Modifier
-                        .size(45.dp)
-                        .clickable {
-                            Log.i("HomeScreen", "Cerrando sesión")
-                        },
-                    tint = Color.White
-                )
             }
         }
-        // Body
+
+        // Body de cambio de contraseña
         Column(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(16.dp)
         ) {
-            Text("Cambiar Contraseña:", style = MaterialTheme.typography.bodyLarge)
+            Text("Ingrese la nueva contraseña:", style = MaterialTheme.typography.bodyLarge)
+            Spacer(modifier = Modifier.height(16.dp))
+            Text("Confirmar contraseña:", style = MaterialTheme.typography.bodyLarge)
         }
     }
 }
 
 @Preview(showBackground = true, showSystemUi = true)
 @Composable
-fun ChangePwdScreenPreview() {
+fun ChangePwdScreenV2Preview() {
     _512LaSalleAppTheme {
-        ChangePwdScreen(innerPadding = PaddingValues(0.dp))
+        ChangePwdScreenV2(innerPadding = PaddingValues(0.dp))
     }
 }
