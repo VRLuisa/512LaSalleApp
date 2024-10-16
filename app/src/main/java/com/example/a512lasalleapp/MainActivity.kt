@@ -28,19 +28,12 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
-import com.example.a512lasalleapp.ui.screens.CalendarScreen
-import com.example.a512lasalleapp.ui.screens.ChangePwdScreenV2
-import com.example.a512lasalleapp.ui.screens.GradesScreenV2
-import com.example.a512lasalleapp.ui.screens.HomeScreen
-import com.example.a512lasalleapp.ui.screens.NewsDetailScreen
-import com.example.a512lasalleapp.ui.screens.SettingsScreenV2
-import com.example.a512lasalleapp.ui.screens.ThemeChangeScreenV2
+import com.example.a512lasalleapp.ui.screens.*
 import com.example.a512lasalleapp.ui.theme._512LaSalleAppTheme
 import com.example.a512lasalleapp.ui.utils.Screens
 import com.example.a512lasalleapp.ui.utils.bottomNavBarItems
 import com.exyte.animatednavbar.AnimatedNavigationBar
 import com.exyte.animatednavbar.animation.indendshape.shapeCornerRadius
-import com.example.a512lasalleapp.ui.screens.ThemeChangeScreenV2
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -115,13 +108,22 @@ class MainActivity : ComponentActivity() {
                         composable(route = Screens.Settings.route) {
                             SettingsScreenV2(innerPadding = innerPadding, navController = navController)
                         }
+                        composable(
+                            route = "subject_info/{subjectName}",
+                            arguments = listOf(navArgument("subjectName") { type = NavType.StringType })
+                        ) {
+                            val subjectName = it.arguments?.getString("subjectName") ?: "Sin título"
+                            SubjectInfoScreenV2(subjectName = subjectName, innerPadding = innerPadding, navController = navController)
+                        }
                         composable(route = "change_password") {
                             ChangePwdScreenV2(innerPadding = innerPadding)
                         }
                         composable(route = "change_theme") {
-                            ThemeChangeScreenV2(innerPadding = innerPadding, navController = navController)
+                            ThemeChangeScreenV2(innerPadding = innerPadding)
                         }
-
+                        composable(route = "payments") {
+                            PaymentHistoryScreenV2(innerPadding = innerPadding, navController = navController)
+                        }
                         composable(
                             route = Screens.NewsDetail.route + "/{id}",
                             arguments = listOf(

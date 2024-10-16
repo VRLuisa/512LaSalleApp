@@ -1,6 +1,5 @@
 package com.example.a512lasalleapp.ui.screens
 
-import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -19,13 +18,11 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.navigation.NavController
-import androidx.navigation.compose.rememberNavController
 import com.example.a512lasalleapp.R
 import com.example.a512lasalleapp.ui.theme._512LaSalleAppTheme
 
 @Composable
-fun ThemeChangeScreenV2(innerPadding: PaddingValues, navController: NavController) {
+fun ThemeChangeScreenV2(innerPadding: PaddingValues) {
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -76,15 +73,11 @@ fun ThemeChangeScreenV2(innerPadding: PaddingValues, navController: NavControlle
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Spacer(modifier = Modifier.height(20.dp))
-            // Opción para cambiar a tema claro
+            // Solo el diseño de los botones
             Card(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(8.dp)
-                    .clickable {
-                        // Lógica para cambiar a tema claro
-                        Log.i("ThemeChange", "Cambiando a tema claro")
-                    },
+                    .padding(8.dp),
                 shape = MaterialTheme.shapes.medium
             ) {
                 Text(
@@ -94,15 +87,10 @@ fun ThemeChangeScreenV2(innerPadding: PaddingValues, navController: NavControlle
                 )
             }
 
-            // Opción para cambiar a tema oscuro
             Card(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(8.dp)
-                    .clickable {
-                        // Lógica para cambiar a tema oscuro
-                        Log.i("ThemeChange", "Cambiando a tema oscuro")
-                    },
+                    .padding(8.dp),
                 shape = MaterialTheme.shapes.medium
             ) {
                 Text(
@@ -118,8 +106,7 @@ fun ThemeChangeScreenV2(innerPadding: PaddingValues, navController: NavControlle
 @Preview(showBackground = true, showSystemUi = true)
 @Composable
 fun ThemeChangeScreenV2Preview() {
-    val navController = rememberNavController()
     _512LaSalleAppTheme {
-        ThemeChangeScreenV2(innerPadding = PaddingValues(0.dp), navController = navController)
+        ThemeChangeScreenV2(innerPadding = PaddingValues(0.dp))
     }
 }
