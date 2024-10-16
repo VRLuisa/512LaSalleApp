@@ -29,7 +29,7 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.example.a512lasalleapp.ui.screens.CalendarScreen
-import com.example.a512lasalleapp.ui.screens.GradesScreen
+import com.example.a512lasalleapp.ui.screens.GradesScreenV2
 import com.example.a512lasalleapp.ui.screens.HomeScreen
 import com.example.a512lasalleapp.ui.screens.NewsDetailScreen
 import com.example.a512lasalleapp.ui.screens.SettingsScreen
@@ -59,7 +59,7 @@ class MainActivity : ComponentActivity() {
                 Scaffold(
                     modifier = Modifier.fillMaxSize(),
                     bottomBar = {
-                        if(currentRoute in bottomNavRoutes){
+                        if (currentRoute in bottomNavRoutes) {
                             AnimatedNavigationBar(
                                 selectedIndex = selectedItemIndex,
                                 modifier = Modifier.height(90.dp),
@@ -97,38 +97,37 @@ class MainActivity : ComponentActivity() {
                                 }
                             }
                         }
-
                     }
                 ) { innerPadding ->
                     NavHost(navController = navController, startDestination = Screens.Home.route) {
                         composable(route = Screens.Home.route) {
                             HomeScreen(innerPadding = innerPadding, navController = navController)
                         }
-                        composable(route = Screens.Calendar.route){
+                        composable(route = Screens.Calendar.route) {
                             CalendarScreen(innerPadding = innerPadding)
                         }
-                        composable(route = Screens.Grades.route){
-                            GradesScreen(innerPadding = innerPadding)
+                        composable(route = Screens.Grades.route) {
+                            GradesScreenV2(innerPadding = innerPadding, navController = navController)
                         }
                         composable(route = Screens.Settings.route) {
                             SettingsScreen(innerPadding = innerPadding)
                         }
                         composable(
-                            route = Screens.NewsDetail.route+"/{id}",
+                            route = Screens.NewsDetail.route + "/{id}",
                             arguments = listOf(
-                                navArgument("id"){
+                                navArgument("id") {
                                     type = NavType.IntType
                                     nullable = false
                                 }
                             )
                         ) {
-                            val id = it.arguments?.getInt("id",0) ?: 0
-                            NewsDetailScreen(newsId=id,innerPadding = innerPadding)
+                            val id = it.arguments?.getInt("id", 0) ?: 0
+                            NewsDetailScreen(newsId = id, innerPadding = innerPadding)
                         }
                     }
-
                 }
             }
         }
     }
 }
+
